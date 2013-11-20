@@ -148,7 +148,10 @@ public class Rational implements Comparable {
     /*=============================================
       int compareTo(Object) -- tells which of two Rationals is greater
       pre:  
-      post: 
+      post: Throws exception if input not an instance of class Rational.
+            Returns 0 if calling Rational is equiv to input Rational.
+            Returns negative integer if this < other.
+            Returns positive integer if this > other.
       =============================================*/
     public int compareTo( Object other ) {
 
@@ -196,7 +199,8 @@ public class Rational implements Comparable {
 	System.out.println( "r > t: " +  r.compareTo(t) );
 	System.out.println( "r > s: " +  r.compareTo(s) );
 	System.out.println( "s > t: " +  s.compareTo(t) );
-	System.out.println( "s > y: " +  s.compareTo(y) );
+	//uncommenting the line below should trigger a runtime error
+	//	System.out.println( "s > y: " +  s.compareTo(y) );
 
 	System.out.println( "v.equals(v): " + v.equals(v) );
 	System.out.println( "v.equals(w): " + v.equals(w) );
