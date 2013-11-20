@@ -1,4 +1,4 @@
-public class Rational {
+public class Rational implements Comparable {
 
     private int _numerator;
     private int _denominator;
@@ -115,19 +115,62 @@ public class Rational {
     }
 
 
-    public int compareTo( Rational other ) {
+    /*=============================================
+      boolean equals(Object) -- tells whether 2 Objs are equivalent
+      pre:  other is an instance of class Rational
+      post: Returns true if this and other are aliases (pointers to same 
+      Object), or if this and other have matching attribute values. 
+      (which in this case indicates equivalent fractions)
+      =============================================*/
+    public boolean equals( Object other ) { 
+
+	//First, reduce both fractions.
+	//...thus allowing for direct comparison of attributes
+	reduce();
+
+	if ( other instanceof Rational ) 
+	    ((Rational)other).reduce();
+	/* Typecasting necessary because var type of other is Object, 
+	   and an Object does not have a reduce() method.
+	 */
+
+	//Q: Why is boolean short-circuiting essential below?
+	//   ie, What would happen if Java did not do BS-C?
+	return this == other //check for aliases
+	    || 
+	    ( other instanceof Rational
+	      && this._numerator == ((Rational)other)._numerator 
+	      && this._denominator == ((Rational)other)._denominator );
+
+    }//end equals()
+
+
+    /*=============================================
+      int compareTo(Object) -- tells which of two Rationals is greater
+      pre:  
+      post: 
+      =============================================*/
+    public int compareTo( Object other ) {
+
+	// If other is not a Rational, throw an exception
+	// This will exit the function, generating a runtime error
+	if ( ! (other instanceof Rational) )
+	    // ClassCastException specified by Java API.
+	    // Input String is optional; gives diagnostics info.
+	    throw new ClassCastException("\nMy first error message! "
+					 + " compareTo() input not a Rational");
 
 	int thisNumerator, otherNumerator;
 
-	thisNumerator = _numerator * other._denominator;
-	otherNumerator = _denominator * other._numerator;
+	thisNumerator = _numerator * ((Rational)other)._denominator;
+	otherNumerator = _denominator * ((Rational)other)._numerator;
 
 	return thisNumerator - otherNumerator;
-
     }
 
+
     //main method for testing
-    public static void main(String[] args) {
+    public static void main( String[] args ) {
 	
 	Rational r = new Rational( 3, 7 );
 	Rational s = new Rational();
@@ -136,14 +179,30 @@ public class Rational {
 	Rational u = new Rational( 1, 2 );
 	Rational v = new Rational( 2, 3 );
 	Rational w = new Rational( 8, 12 );
+	Rational x = new Rational( 8, 12 );
+	String y = "yoo";
 	
 	System.out.println("r: " + r );
 	System.out.println("s: " +  s );
 	System.out.println("t: " +  t );
 
-	System.out.println( r + " represented as a floating pt num: " 
+	System.out.println( r + " as a floating pt approximation: " 
 			    + r.floatValue() );
+	System.out.println( s + " as a floating pt approximation: " 
+			    + s.floatValue() );
+	System.out.println( t + " as a floating pt approximation: " 
+			    + t.floatValue() );
 
+	System.out.println( "r > t: " +  r.compareTo(t) );
+	System.out.println( "r > s: " +  r.compareTo(s) );
+	System.out.println( "s > t: " +  s.compareTo(t) );
+	System.out.println( "s > y: " +  s.compareTo(y) );
+
+	System.out.println( "v.equals(v): " + v.equals(v) );
+	System.out.println( "v.equals(w): " + v.equals(w) );
+	System.out.println( "w.equals(x): " + w.equals(x) );
+
+	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	System.out.print( r + " * " + t + " = ");
 	r.multiply(t);
 	System.out.println(r);
@@ -170,8 +229,15 @@ public class Rational {
 	System.out.println( "\nNow testing static gcd...");
 	System.out.println( Rational.gcd(100,9) );
 	System.out.println( Rational.gcd(245,25) );
-		
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/		
     }
 
 
 }//end class Rational
+
+
+    /*=============================================
+       () -- 
+      pre:  
+      post: 
+      =============================================*/
