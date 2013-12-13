@@ -4,7 +4,7 @@
   Each CandidatePool object contains the following
   instance variables that you may need to use:
        
-  pool
+  _pool
       An ArrayList of only Candidate objects
 
 
@@ -12,16 +12,16 @@
    
   getCandidatesForPosition( String pos )
       Returns a candidate-only ArrayList containing all
-      the Candidates in pool that have position pos.
+      the Candidates in _pool that have position pos.
 
   getBestCandidate( String pos )
-      Returns the Candidte in pool that matches position
+      Returns the Candidte in _pool that matches position
       pos with the highest score.
       If there are no candidates for the given position, 
       returns null.
 
   removeCandidatesForPosition( String pos )
-      Removes all the Candidates in the pool that match
+      Removes all the Candidates in the _pool that match
       position pos.
       Returns number of candidates removed.
   =====================================*/
@@ -36,18 +36,18 @@ public class CandidatePool {
     
     //=================================
     //DO NOT MODIFY THIS CODE BLOCK
-    ArrayList<Candidate> pool;
+    ArrayList<Candidate> _pool;
     
     public CandidatePool() {
-	pool = new ArrayList<Candidate>();
+	_pool = new ArrayList<Candidate>();
     }
 
     public void addCandidate( Candidate c ) {
-	pool.add(c);
+	_pool.add(c);
     }
 
     public String toString() {
-	return pool.toString();
+	return _pool.toString();
     }    
     //=================================
 
@@ -58,9 +58,9 @@ public class CandidatePool {
 
 	ArrayList<Candidate> c = new ArrayList<Candidate>();
 	
-	for( int i = 0; i < pool.size(); i++ ) 
-	    if ( pool.get(i).getPosition().equals(pos) ) 
-		c.add( pool.get(i) );
+	for( int i = 0; i < _pool.size(); i++ ) 
+	    if ( _pool.get(i).getPosition().equals(pos) ) 
+		c.add( _pool.get(i) );
 
 	return c;
     }
@@ -91,10 +91,10 @@ public class CandidatePool {
     public int removeCandidatesForPosition( String pos ) {
 	int count = 0;
 
-	for( int i = 0; i < pool.size(); i++ ) 
-	    if ( pool.get(i).getPosition().equals(pos) ) {
+	for( int i = 0; i < _pool.size(); i++ ) 
+	    if ( _pool.get(i).getPosition().equals(pos) ) {
 		count++;
-		pool.remove(i);
+		_pool.remove(i);
 	       	i--;
 	    }
 	return count;
