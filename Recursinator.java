@@ -59,6 +59,7 @@ public class Recursinator {
      * eg: fibRec(3) -> 2
      *******************************************************/
     public static int fibRec( int n ) { 
+
         if ( n < 2 )
             return n;
 	else
@@ -75,6 +76,7 @@ public class Recursinator {
      * eg: fenceIt(3) -> "|---|---|"
      *******************************************************/
     public static String fenceIt( int n ) { 
+
 	String retStr = "|";
 
 	for( int i=0; i<n; i++ ) 
@@ -93,6 +95,7 @@ public class Recursinator {
      * eg: fenceRec(3) -> "|---|---|"
      *******************************************************/
     public static String fenceRec( int n ) { 
+
 	if ( n == 1 ) 
 	    return "|";
 	else 
@@ -111,14 +114,25 @@ public class Recursinator {
      *******************************************************/
     public static String commafyIt( int n ) { 
 
+	//convert input int to String
 	String retStr = n + "";
+
+	//init counter for number of commas to insert
 	int i = retStr.length() / 3;
-	if ( retStr.length() % 3 == 0 )
+
+	//if num digits divisible by 3, one less comma necessary
+	if ( retStr.length() % 3 == 0 ) 
 	    i--;
-	for ( ; i > 0; i-- ) {
-	    retStr = retStr.substring( 0, retStr.length()-i * 3 ) + "," + 
-		retStr.substring( retStr.length()-i * 3 );
-	}
+
+	/* Algorithm summary:
+	 * Run loop once for each comma, decrementing i each iteration.
+	 * i*3 yields num places from right to current comma insertion pt.
+	 * Insert commas from L to R.
+	 */
+	for ( ; i > 0; i-- ) 
+	    retStr = retStr.substring( 0, retStr.length() - i*3 ) + "," + 
+		retStr.substring( retStr.length() - i*3 );
+
 	return retStr;
     }
 
@@ -134,15 +148,13 @@ public class Recursinator {
      *******************************************************/
     public static String commafyRec( int n ) { 
 	
-	/* // prelim version... does not account for 1000, 1050, etc.
+	/* Preliminary version. Fails for 1000, 1050, etc.
 	String retStr = "";
-	if (n < 1000)
-	    retStr += n;
-	else 
-	    retStr = commafyRec( n/1000 ) + "," + n%1000;
+	if (n < 1000)   retStr += n;
+	else   retStr = commafyRec( n / 1000 ) + "," + n % 1000;
 	*/
 
-	//BETTER VERSION: handles 1000, 1050, etc
+	//BETTER VERSION (handles 1000, 1050, etc):
 	String retStr = "";
 
 	if ( n < 1000 )
@@ -154,6 +166,7 @@ public class Recursinator {
 	    //overwrite tmp with last 3 chars of tmp
 	    tmp = tmp.substring( tmp.length()-3 );
 
+	    //recurse on remaining digits, growing String from R to L
 	    retStr = commafyRec( n/1000 ) + "," + tmp;
 	}
 	return retStr;
@@ -172,6 +185,7 @@ public class Recursinator {
 	  when you're ready to test each line.
 	  ============================================*/
 
+	/*--------------------------------------------
 	System.out.println( "fact(0) -> " + fact(0) ); // 1
 	System.out.println( "fact(1) -> " + fact(1) ); // 1
 	System.out.println( "fact(2) -> " + fact(2) ); // 2
@@ -220,7 +234,10 @@ public class Recursinator {
 
 	System.out.println( "commafyIt(100) -> " + commafyIt(100) );
 	System.out.println( "commafyIt(1000) -> " + commafyIt(1000) );
-	System.out.println( "commafyIt(1000) -> " + commafyIt(10000) );
+	System.out.println( "commafyIt(1500) -> " + commafyIt(1500) );
+	System.out.println( "commafyIt(1050) -> " + commafyIt(1050) );
+	System.out.println( "commafyIt(1005) -> " + commafyIt(1005) );
+	System.out.println( "commafyIt(10000) -> " + commafyIt(10000) );
 	System.out.println( "commafyIt(100000) -> " + commafyIt(100000) );
 	System.out.println( "commafyIt(1000000) -> " + commafyIt(1000000) );
 
@@ -233,11 +250,13 @@ public class Recursinator {
 
 	System.out.println( "commafyRec(100) -> " + commafyRec(100) );
 	System.out.println( "commafyRec(1000) -> " + commafyRec(1000) );
-	System.out.println( "commafyRec(1000) -> " + commafyRec(10000) );
+	System.out.println( "commafyRec(1500) -> " + commafyRec(1500) );
+	System.out.println( "commafyRec(1050) -> " + commafyRec(1050) );
+	System.out.println( "commafyRec(1005) -> " + commafyRec(1005) );
+	System.out.println( "commafyRec(10000) -> " + commafyRec(10000) );
 	System.out.println( "commafyRec(100000) -> " + commafyRec(100000) );
 	System.out.println( "commafyRec(1000000) -> " + commafyRec(1000000) );
-	/*--------------------------------------------
-	  --------------------------------------------*/
+	--------------------------------------------*/
 
     }//end main
 
