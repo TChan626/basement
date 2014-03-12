@@ -38,7 +38,7 @@ public class BinSearch {
 	if ( a[m] == target ) // target found
 	    tPos = m;
 	else if ( a[m] > target ) // value at middle index higher than target
-	    tPos = binSearchRec( a, target, 0, m-1 ); //n->n/2
+	    tPos = binSearchRec( a, target, lo, m-1 ); //n->n/2
 	else if ( a[m] < target ) // value at middle index lower than target
 	    tPos = binSearchRec( a, target, m+1, hi ); //n->n/2
 	
