@@ -127,6 +127,7 @@ public class LList<T> implements List<T> { //your List.java must be in same dir
 	    //remove target node
 	    tmp.setNext( tmp.getNext().getNext() );
 	}
+	_size--;
 
 	return retVal;
     }
