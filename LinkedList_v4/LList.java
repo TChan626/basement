@@ -21,7 +21,7 @@ public class LList<T> implements List<T> { //your List.java must be in same dir
 
     //insert a node in front of first node
     public boolean add( T newVal ) { 
-	addFirst( newVal );
+	addLast( newVal );
 	return true; //per Java API spec
     } 
 
@@ -39,7 +39,7 @@ public class LList<T> implements List<T> { //your List.java must be in same dir
 
 	//if index==0, insert node before head node
 	if ( index == 0 ) 
-	    add( newVal );
+	    addFirst( newVal );
 	else {
 	    DLLNode<T> tmp1 = _head; //create alias to head
 
@@ -158,7 +158,7 @@ public class LList<T> implements List<T> { //your List.java must be in same dir
 	_tail = new DLLNode<T>( newLastVal, _tail, null );
 
 	if ( _size == 0 ) 
-	    _tail = _head;
+	    _head = _tail;
 	else 
 	    _tail.getPrev().setNext( _tail );
 	_size++;
