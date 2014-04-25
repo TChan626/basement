@@ -65,7 +65,7 @@ public class RQueue<T> implements Queue<T> {
 
 
     /******************************************
-     * void sample() -- a means of shuffling the queue
+     * void sample() -- a means of "shuffling" the queue
      * Algo:
      * Move front element to end, x times.
      *  ( 0 <= x < queue size - 1 )
